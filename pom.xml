@@ -11,11 +11,32 @@
         <!-- Spring version -->
         <version.spring>3.2.5.RELEASE</version.spring>
         <version.servlet>2.5</version.servlet>
-        <version.commons.logging>1.1.1</version.commons.logging>
         <version.jstl>1.2</version.jstl>
         <version.taglibs>1.1.2</version.taglibs>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.commons</groupId>-->
+            <!--<artifactId>commons-lang3</artifactId>-->
+            <!--<version>3.2</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.8</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>jexcelapi</groupId>
             <artifactId>jxl</artifactId>

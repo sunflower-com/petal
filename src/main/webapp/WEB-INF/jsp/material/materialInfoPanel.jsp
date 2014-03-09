@@ -1,6 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../jstl.jsp"/>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../meta.jsp"/>
     <div class="panel panel-success">
         <div class="panel-heading">

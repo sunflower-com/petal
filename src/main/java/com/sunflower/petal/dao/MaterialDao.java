@@ -43,4 +43,11 @@ public interface MaterialDao {
                     one=@One(select="com.sunflower.petal.dao.MaterialCategoryDao.listAll"))
     })
     public List<Material> listAll();
+
+    /**
+     * 分页查询接口
+     * @return
+     */
+    @Select("select * from material limit #{start},#{pageNum} ")
+    public List<Material> listPage(@Param("start") int start,@Param("pageNum") int pageNum);
 }

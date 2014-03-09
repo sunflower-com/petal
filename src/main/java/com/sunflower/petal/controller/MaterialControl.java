@@ -1,7 +1,6 @@
 package com.sunflower.petal.controller;
 
 import com.sunflower.petal.entity.Material;
-import com.sunflower.petal.entity.MaterialCategory;
 import com.sunflower.petal.service.MaterialCategoryService;
 import com.sunflower.petal.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +21,12 @@ public class MaterialControl {
     @Autowired
     private MaterialCategoryService categoryService;
 
-    @RequestMapping(value="",method = RequestMethod.GET)
-    public String material(Model model){
-        List<MaterialCategory> result=categoryService.getAllMaterialCategorys();
-        model.addAttribute("categorys",result);
-        return "material/materialInfoPanel";
-    }
+//    @RequestMapping(value="",method = RequestMethod.GET)
+//    public String material(Model model){
+//        List<MaterialCategory> result=categoryService.getAllMaterialCategorys();
+//        model.addAttribute("categorys",result);
+//        return "material/materialInfoPanel";
+//    }
     @RequestMapping(value= "/list")
     public String getAllList(Model model){
         List<Material> result=materialService.getAllMaterials();
@@ -45,7 +44,7 @@ public class MaterialControl {
     public String getMaterial(@RequestParam("id") Long id,Model model){
         Material material=materialService.getMaterial(id);
         model.addAttribute("material",material);
-        return "material/materialInfoPanel";
+        return "/WEB-INF/jsp/material/materialInfoPanel.jsp";
     }
 
     @RequestMapping(params = "method=deleteMaterial",method= RequestMethod.GET)

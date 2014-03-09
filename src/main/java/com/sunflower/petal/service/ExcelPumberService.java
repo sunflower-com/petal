@@ -12,7 +12,13 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.Formatter;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -24,6 +30,7 @@ import static com.sunflower.petal.service.support.ExcelConstants.*;
  */
 @Component
 public class ExcelPumberService {
+    private Logger logger= LoggerFactory.getLogger(ExcelPumberService.class);
     @Autowired
     private  MaterialService materialService;
     @Autowired
@@ -58,6 +65,7 @@ public class ExcelPumberService {
             int end=Math.min(rows,end_row);//避免遍历越界
             //得到第一列第一行的单元格
             long time=System.currentTimeMillis();
+            String timeStr=DateFormatUtils.format(time,"yyyyMMddHHmmss");
             Product product=new Product();
             AssemblyRule rule=new AssemblyRule();
             Cell productNameCell=sheet.getCell(title_colum,title_row);
@@ -85,7 +93,7 @@ public class ExcelPumberService {
                     try {//迭代过程中捕获异常信息
                         switch (column){
                             case xuhao_column:
-                                material.setIdentifier(time+"."+content);
+                                material.setIdentifier(timeStr+"-"+content);
                                 break;
                             case fenlei_column://fenlei
                                 if(StringUtils.isNotBlank(content)){
@@ -102,7 +110,8 @@ public class ExcelPumberService {
                                 break;
                             case name_guige_column:
                                 material.setName(content);
-                                flag=false;//立即停止迭代
+                                if(StringUtils.isBlank(content))
+                                   flag=false;//立即停止迭代
                                 break;
                             case count_column://材料所需数量
                                 count=Integer.parseInt(content);
@@ -125,7 +134,10 @@ public class ExcelPumberService {
                         }
 
                     }catch(NumberFormatException e){
-                        throw new IllegalStateException("数据格式有误"+"("+e.getCause()+")" +"坐标位置:"+i+","+column);
+                        status.putAttachInfo("坐标位置",i+","+column);
+                        status.setMessage("数据格式有误");
+                        status.setResult(ImportStatus.status.ERROR);
+                        logger.warn(status.toString());
                     }
                 } //end of message
                 if(StringUtils.isNotBlank(material.getName())){
@@ -138,6 +150,7 @@ public class ExcelPumberService {
             }
             //紧缩
             rule.tighten();
+            //合法
             if(rule.isIllegal()){
                 //规则单入库 事物性
                 assemblyService.addOneRule(rule);

@@ -1,7 +1,9 @@
 package com.sunflower.petal.service;
 
 import com.sunflower.petal.dao.ProductDao;
+import com.sunflower.petal.entity.Pagination;
 import com.sunflower.petal.entity.Product;
+import com.sunflower.petal.service.support.Paginationable;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Created by xiangkui on 14-2-23.
  */
 @Service
-public class ProductService {
+public class ProductService implements Paginationable<Product>{
     @Autowired
     private ProductDao dao;
     public void addOneProduct(Product product){
@@ -38,5 +40,10 @@ public class ProductService {
      */
     public Product getProductByName(String name){
      return dao.queryByName(name);
+    }
+
+    @Override
+    public Pagination<Product> getPagination(int pageSize, int pageIndex) {
+        throw new UnsupportedOperationException("");
     }
 }
