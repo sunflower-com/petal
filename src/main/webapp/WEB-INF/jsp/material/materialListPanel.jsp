@@ -60,37 +60,41 @@
                 option.append(getInfo);
                 option.append(remove);
             }
+            //翻页
+            var options = {
+                currentPage:1,
+                numberOfPages: 5,
+                totalPages:0x7fffffff,
+                size:"mini",
+                bootstrapMajorVersion:3,
+                alignment:"left",
+                useBootstrapTooltip:true,
+            onPageClicked: function(e,originalEvent,type,page){
+                var pages = $(e.currentTarget).bootstrapPaginator("getPages");
+                console.log(pages)
+//                loadOnePage(10,pages.current);
+            },
+                shouldShowPage:function(type, page, current){
+                    switch(type)
+                    {
+                        case "first":
+                        case "last":
+                            return false;
+                        default:
+                            return true;
+                    }
+                }
+            }
+//            $('#pagination').bootstrapPaginator(options);
+            $('table').tablePagination({});
+
         }).fail(function(jqXHR,textStatus){
 //                alert("Request failed:"+textStatus);
         });
     }
 
     $(document).ready(function(){
-        var options = {
-            currentPage:1,
-            totalPages:0x7fffffff,
-            size:"mini",
-            bootstrapMajorVersion:3,
-            alignment:"left",
-            useBootstrapTooltip:true,
-            onPageClicked: function(e,originalEvent,type,page){
-                var pages = $(e.currentTarget).bootstrapPaginator("getPages");
-                console.log(pages)
-                loadOnePage(10,pages.current);
-            },
-            shouldShowPage:function(type, page, current){
-                switch(type)
-                {
-                    case "first":
-                    case "last":
-                        return false;
-                    default:
-                        return true;
-                }
-            }
-        }
-        $('#pagination').bootstrapPaginator(options);
-        loadOnePage(10,0);//装载第一页
+        loadOnePage(1000,0);//装载第一页
     });
 </script>
 
@@ -125,15 +129,15 @@
                                 <button class="btn btn-sm btn-warning" >批量删除</button>
                             </div>
                             <div class="col-sm-8" id="panel-menu">
-                                <ul class="pagination pagination-sm">
-                                    <li><a href="#">&laquo;</a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">&raquo;</a></li>
-                                </ul>
+                                <%--<ul class="pagination pagination-sm">--%>
+                                    <%--<li><a href="#">&laquo;</a></li>--%>
+                                    <%--<li class="active"><a href="#">1</a></li>--%>
+                                    <%--<li><a href="#">2</a></li>--%>
+                                    <%--<li><a href="#">3</a></li>--%>
+                                    <%--<li><a href="#">4</a></li>--%>
+                                    <%--<li><a href="#">5</a></li>--%>
+                                    <%--<li><a href="#">&raquo;</a></li>--%>
+                                <%--</ul>--%>
                                 <ul id="pagination">
 
                                 </ul>

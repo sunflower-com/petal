@@ -11,7 +11,7 @@
 
 <script src="<%=basePath%>/lib/jquery-1.9.1.min.js"></script>
 <script src="<%=basePath%>/lib/bootstrap/3.1.0/js/bootstrap.js"></script>
-<%--<script src="<%=basePath%>/lib/tablePagination.js"></script>--%>
+<script src="<%=basePath%>/lib/tablePagination.js"></script>
 <script src="<%=basePath%>/lib/bootstrap/ext/bootstrap-paginator.js"></script>
 
 
