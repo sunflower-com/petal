@@ -23,10 +23,25 @@
  */
 package com.sunflower.petal.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sunflower.petal.config.PropertyPlaceholderConfig;
+import com.sunflower.petal.dao.ImageDao;
+import com.sunflower.petal.entity.Image;
 import org.apache.commons.io.IOUtils;
-import org.davidmendoza.fileUpload.config.PropertyPlaceholderConfig;
-import org.davidmendoza.fileUpload.dao.ImageDao;
-import org.davidmendoza.fileUpload.model.Image;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,15 +55,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
 
 /**
  *
@@ -83,7 +89,7 @@ public class ImageController {
             image.setDeleteUrl("/delete/"+image.getId());
             image.setDeleteType("DELETE");
         }
-        Map<String, Object> files = new HashMap<>();
+        Map<String, Object> files = new HashMap<String, Object>();
         files.put("files", list);
         log.debug("Returning: {}", files);
         return files;
@@ -95,7 +101,7 @@ public class ImageController {
         log.debug("uploadPost called");
         Iterator<String> itr = request.getFileNames();
         MultipartFile mpf;
-        List<Image> list = new LinkedList<>();
+        List<Image> list = new LinkedList<Image>();
         
         while (itr.hasNext()) {
             mpf = request.getFile(itr.next());
@@ -137,7 +143,7 @@ public class ImageController {
             
         }
         
-        Map<String, Object> files = new HashMap<>();
+        Map<String, Object> files = new HashMap<String, Object>();
         files.put("files", list);
         return files;
     }
@@ -179,8 +185,8 @@ public class ImageController {
         File thumbnailFile = new File(fileUploadDirectory+"/"+image.getThumbnailFilename());
         thumbnailFile.delete();
         imageDao.delete(image);
-        List<Map<String, Object>> results = new ArrayList<>();
-        Map<String, Object> success = new HashMap<>();
+        List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
+        Map<String, Object> success = new HashMap<String, Object>();
         success.put("success", true);
         results.add(success);
         return results;
