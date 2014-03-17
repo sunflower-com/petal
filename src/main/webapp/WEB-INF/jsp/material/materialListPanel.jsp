@@ -86,7 +86,7 @@
                 }
             }
 //            $('#pagination').bootstrapPaginator(options);
-            $('table').tablePagination({});
+            $('#material_tb').tablePagination({});
 
         }).fail(function(jqXHR,textStatus){
 //                alert("Request failed:"+textStatus);

@@ -26,7 +26,7 @@
         </a>
         <ul class="dropdown-menu">
             <li><a href="/budget/material">材料成本</a></li>
-            <li><a href="/production/sell">销售利润</a></li>
+            <li><a href="/budget/sell">销售利润</a></li>
         </ul>
     </li>
 </ul>

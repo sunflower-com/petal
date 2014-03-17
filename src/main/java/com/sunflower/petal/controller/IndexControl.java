@@ -48,7 +48,7 @@ public class IndexControl {
     public String productItems(@PathVariable("menuItem") String menuItem){
         String redirect="";
         if(menuItem.equals("assembly")){
-
+            redirect="product/assembly";
         }else{//unkwon pages
 
         }
@@ -60,7 +60,6 @@ public class IndexControl {
     public String budgetItems(@PathVariable("menuItem") String menuItem){
         String redirect="";
         if(menuItem.equals("assembly")){
-
         }else{//unkwon pages
 
         }

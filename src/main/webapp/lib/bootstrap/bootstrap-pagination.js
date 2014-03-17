@@ -295,9 +295,6 @@
         $(this).each(function (index, item) {
             var table=$(this)[0];
             var totalPagesId, currPageId, rowsPerPageId, firstPageId, prevPageId, nextPageId, lastPageId;
-//            totalPagesId = '#tablePagination_totalPages';
-//            currPageId = '#tablePagination_currPage';
-//            rowsPerPageId = '#tablePagination_rowsPerPage';
             firstPageId = '#tablePagination_firstPage';
             prevPageId = '#tablePagination_prevPage';
             nextPageId = '#tablePagination_nextPage';
