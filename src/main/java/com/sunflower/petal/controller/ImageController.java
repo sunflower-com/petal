@@ -39,8 +39,8 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sunflower.petal.config.PropertyPlaceholderConfig;
-import com.sunflower.petal.dao.ImageDao;
 import com.sunflower.petal.entity.Image;
+import com.sunflower.petal.service.ImageService;
 import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
@@ -61,17 +61,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  * @author jdmr
  */
 @Controller
-@RequestMapping
+@RequestMapping("/image")
 @Import(PropertyPlaceholderConfig.class)
 public class ImageController {
-    
     private static final Logger log = LoggerFactory.getLogger(ImageController.class);
-    
-    @Autowired
-    private ImageDao imageDao;
+
     @Value("${file.upload.directory}")
     private String fileUploadDirectory;
+    @Autowired
+    private ImageService imageService;
 
+    //    @Autowired
+//    private ImageService imageService;
+//    @Autowired
+//    private ImageDao imageDao;
     @RequestMapping
     public String index() {
         log.debug("ImageController home");
@@ -82,7 +85,7 @@ public class ImageController {
     public @ResponseBody
     Map list() {
         log.debug("uploadGet called");
-        List<Image> list = imageDao.list();
+        List<Image> list = imageService.list();
         for(Image image : list) {
             image.setUrl("/picture/"+image.getId());
             image.setThumbnailUrl("/thumbnail/"+image.getId());
@@ -128,7 +131,7 @@ public class ImageController {
                 image.setNewFilename(newFilename);
                 image.setContentType(contentType);
                 image.setSize(mpf.getSize());
-                image = imageDao.create(image);
+                image = imageService.create(image);
                 
                 image.setUrl("/picture/"+image.getId());
                 image.setThumbnailUrl("/thumbnail/"+image.getId());
@@ -150,7 +153,7 @@ public class ImageController {
     
     @RequestMapping(value = "/picture/{id}", method = RequestMethod.GET)
     public void picture(HttpServletResponse response, @PathVariable Long id) {
-        Image image = imageDao.get(id);
+        Image image = imageService.get(id);
         File imageFile = new File(fileUploadDirectory+"/"+image.getNewFilename());
         response.setContentType(image.getContentType());
         response.setContentLength(image.getSize().intValue());
@@ -164,7 +167,7 @@ public class ImageController {
     
     @RequestMapping(value = "/thumbnail/{id}", method = RequestMethod.GET)
     public void thumbnail(HttpServletResponse response, @PathVariable Long id) {
-        Image image = imageDao.get(id);
+        Image image = imageService.get(id);
         File imageFile = new File(fileUploadDirectory+"/"+image.getThumbnailFilename());
         response.setContentType(image.getContentType());
         response.setContentLength(image.getSize().intValue());
@@ -179,12 +182,12 @@ public class ImageController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public @ResponseBody
     List delete(@PathVariable Long id) {
-        Image image = imageDao.get(id);
+        Image image = imageService.get(id);
         File imageFile = new File(fileUploadDirectory+"/"+image.getNewFilename());
         imageFile.delete();
         File thumbnailFile = new File(fileUploadDirectory+"/"+image.getThumbnailFilename());
         thumbnailFile.delete();
-        imageDao.delete(image);
+        imageService.delete(image);
         List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
         Map<String, Object> success = new HashMap<String, Object>();
         success.put("success", true);

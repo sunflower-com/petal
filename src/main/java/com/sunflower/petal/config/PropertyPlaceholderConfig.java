@@ -6,7 +6,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@PropertySource("classpath:fileUpload.properties")
+@PropertySource({"common.properties"}
+)
 public class PropertyPlaceholderConfig {
 
     @Bean
