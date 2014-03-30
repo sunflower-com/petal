@@ -12,7 +12,6 @@ import java.util.List;
  * Created by xiangkui on 14-2-13
  * 原材料数据库持久层.
  */
-@Component
 public interface MaterialDao {
     @Insert("insert into material(identifier,name,categoryId,guige,yanse,danwei,jinjia,beizhu) values " +
             "(#{identifier},#{name},#{materialCategory.id},#{guige},#{yanse},#{danwei},#{jinjia},#{beizhu})")

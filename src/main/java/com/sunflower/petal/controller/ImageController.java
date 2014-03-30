@@ -38,7 +38,6 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sunflower.petal.config.PropertyPlaceholderConfig;
 import com.sunflower.petal.entity.Image;
 import com.sunflower.petal.service.ImageService;
 import org.apache.commons.io.IOUtils;
@@ -62,7 +61,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  */
 @Controller
 @RequestMapping("/image")
-@Import(PropertyPlaceholderConfig.class)
 public class ImageController {
     private static final Logger log = LoggerFactory.getLogger(ImageController.class);
 

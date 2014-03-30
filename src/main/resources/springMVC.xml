@@ -13,17 +13,19 @@
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-    <context:property-placeholder location="classpath*:database.properties"/>
-    <import resource="mybatis-config.xml"/>
+
+    <context:property-placeholder location="/*.properties" ignore-unresolvable="true"/>
+
     <context:component-scan base-package="com.sunflower.petal" />
     <mvc:annotation-driven />
     <mvc:default-servlet-handler/>
+    <import resource="mybatis-config.xml"/>
 
     <!-- 视图解释类 -->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
-        <!--<property name="suffix" value=".jsp"/>&lt;!&ndash;可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  &ndash;&gt;-->
-        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  -->
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+    </bean>
 
 </beans> 

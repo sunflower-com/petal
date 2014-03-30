@@ -16,7 +16,7 @@
         <!--<property name="configLocation" value="/WEB-INF/mybatis-config.xml"/>-->
         <!--<property name="mapperLocations"-->
                   <!--value="classpath*:com/xx/dao/*.xml" />-->
-        <!--<property name="typeAliasesPackage" value="com.xx.vo" />-->
+        <property name="typeAliasesPackage" value="com.sunflower.petal.entity" />
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.sunflower.petal.dao" />
