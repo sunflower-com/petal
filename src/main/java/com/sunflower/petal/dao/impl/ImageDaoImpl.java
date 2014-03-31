@@ -10,24 +10,21 @@ import java.util.List;
  * Created by xiangkui on 2014/3/23.
  */
 @Component
-public class ImageDaoImpl implements ImageDao{
+public class ImageDaoImpl implements ImageDao {
 
-    public List<Image> list() {
-        return null;
-    }
+	public List<Image> list() {
+		return null;
+	}
 
-    @Override
-    public Image create(Image image) {
-        return null;
-    }
+	public Image create(Image image) {
+		return null;
+	}
 
-    @Override
-    public Image get(Long id) {
-        return null;
-    }
+	public Image get(Long id) {
+		return null;
+	}
 
-    @Override
-    public void delete(Image image) {
+	public void delete(Image image) {
 
-    }
+	}
 }

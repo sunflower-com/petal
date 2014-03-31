@@ -34,7 +34,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(Bootstrap.class);
 
-    @Override
     public void onApplicationEvent(ContextRefreshedEvent e) {
         log.info("正在校验应用程序...");
         log.info("应用程序启动完毕!");
