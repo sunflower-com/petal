@@ -12,7 +12,6 @@ import java.util.List;
 @Component
 public class ImageDaoImpl implements ImageDao{
 
-    @Override
     public List<Image> list() {
         return null;
     }
